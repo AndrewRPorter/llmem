@@ -5,7 +5,7 @@ A CLI tool that tracks LLM interactions as NDJSON event logs — edits, mistakes
 ## Install
 
 ```sh
-go install github.com/andrew/llmem@latest
+curl -fsSL https://raw.githubusercontent.com/AndrewRPorter/llmem/main/install.sh | bash
 ```
 
 ## Usage
