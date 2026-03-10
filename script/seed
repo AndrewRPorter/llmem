@@ -1,0 +1,67 @@
+#!/bin/bash
+set -e
+
+LLMEM="./llmem"
+
+# Build first
+make build
+
+# Initialize (remove old data if present)
+rm -rf .llmem
+$LLMEM init
+
+echo "Seeding memories..."
+
+$LLMEM add \
+  --name "Initial project scaffold" \
+  --memory "Created main.go with basic CLI structure using the flag package for argument parsing" \
+  --paths "main.go"
+
+$LLMEM add \
+  --name "Added init command" \
+  --memory "Implemented init command that creates .llmem/ directory and an empty events.ndjson file. Supports optional directory argument." \
+  --paths "cmd/"
+
+$LLMEM add \
+  --name "Refactored to cmd package" \
+  --memory "Moved all command logic from main.go into cmd/ package. Run() now accepts stdout/stderr as io.Writer for testability." \
+  --paths "main.go, cmd/"
+
+$LLMEM add \
+  --name "Added test suite" \
+  --memory "Created tests for version, help, init, and error cases. Split init tests into separate init_test.go file." \
+  --paths "cmd/"
+
+$LLMEM add \
+  --name "Fixed duplicate init error" \
+  --memory "Init now checks if events.ndjson already exists using O_EXCL flag and returns 'already initialized' error." \
+  --paths "cmd/init.go"
+
+$LLMEM add \
+  --name "Bug: forgot to handle no-args case" \
+  --memory "Running llmem with no arguments caused a panic. Fixed by checking len(args) before accessing args[0]." \
+  --paths "cmd/cmd.go"
+
+$LLMEM add \
+  --name "Added Makefile" \
+  --memory "Created Makefile with build target for compiling the llmem binary." \
+  --paths "Makefile"
+
+$LLMEM add \
+  --name "Configured NDJSON event format" \
+  --memory "Each memory is stored as a single JSON line with fields: id (UUID), paths, name, memory, updated_at (RFC3339)." \
+  --paths "cmd/add.go"
+
+$LLMEM add \
+  --name "Path handling edge case" \
+  --memory "Paths flag accepts comma-separated values. Learned to trim whitespace from each path after splitting." \
+  --paths "cmd/"
+
+$LLMEM add \
+  --name "README update" \
+  --memory "Updated README with init and add command documentation and development instructions using make build." \
+  --paths "README.md, scripts/"
+
+echo "Done! Seeded 10 memories."
+echo ""
+echo "View them with: cat .llmem/events.ndjson | python3 -m json.tool --json-lines"
