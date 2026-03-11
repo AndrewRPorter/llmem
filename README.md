@@ -8,7 +8,7 @@ A CLI tool that tracks LLM interactions as NDJSON event logs — edits, mistakes
 curl -fsSL https://raw.githubusercontent.com/AndrewRPorter/llmem/main/install.sh | bash
 ```
 
-## Usage
+## CLI Usage
 
 ```sh
 # Initialize a .llmem directory in the current folder
@@ -19,6 +19,21 @@ llmem init /path/to/project
 
 # Print the version
 llmem version
+```
+
+## LLM Integration
+
+In an MCP file like `.vscode/mcp.json` add the llmem tool:
+
+```json
+{
+    "servers": {
+        "llmem": {
+            "command": "llmem",
+            "args": ["mcp"]
+        }
+    }
+}
 ```
 
 ## Development

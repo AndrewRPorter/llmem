@@ -1,0 +1,8 @@
+{
+    "servers": {
+        "llmem": {
+            "command": "llmem",
+            "args": ["mcp"]
+        }
+    }
+}
