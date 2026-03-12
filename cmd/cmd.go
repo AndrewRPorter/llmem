@@ -17,6 +17,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 		fmt.Fprintf(stderr, "  add        Add a new memory\n")
 		fmt.Fprintf(stderr, "  help       Show this help message\n")
 		fmt.Fprintf(stderr, "  init       Initialize a new .llmem directory\n")
+		fmt.Fprintf(stderr, "  mcp        Start MCP stdio server\n")
 		fmt.Fprintf(stderr, "  read       Read memories\n")
 		fmt.Fprintf(stderr, "  remove     Remove a memory by ID\n")
 		fmt.Fprintf(stderr, "  update     Update llmem to latest version\n")
@@ -38,6 +39,8 @@ func Run(args []string, stdout, stderr io.Writer) int {
 		return cmdAdd(args[1:], stdout, stderr)
 	case "read":
 		return cmdRead(args[1:], stdout, stderr)
+	case "mcp":
+		return cmdMCP(args[1:], stdout, stderr)
 	case "remove":
 		return cmdRemove(args[1:], stdout, stderr)
 	case "update":
