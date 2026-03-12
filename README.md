@@ -8,7 +8,7 @@ A CLI tool that tracks LLM interactions as NDJSON event logs — edits, mistakes
 curl -fsSL https://raw.githubusercontent.com/AndrewRPorter/llmem/main/install.sh | bash
 ```
 
-## CLI Usage
+## Usage
 
 ```sh
 # Initialize a .llmem directory in the current folder
@@ -21,7 +21,13 @@ llmem init /path/to/project
 llmem version
 ```
 
-## LLM Integration
+## Integration
+
+### Agent Skills
+
+For an example skill that teaches agents when and how to save/read memories, see [`.github/skills/save-memory/SKILL.md`](.github/skills/save-memory/SKILL.md).
+
+### MCP
 
 In an MCP file like `.vscode/mcp.json` add the llmem tool:
 
@@ -46,7 +52,7 @@ make build
 ./llmem
 ```
 
-## Example Memory Log
+## Example Memories
 
 ```json
 {"id":"0d707e9b-785a-40db-9dae-a8aae6e48bea","paths":["cmd/add.go","cmd/read.go","cmd/remove.go"],"name":"Data model and storage format","memory":"Memories are stored as append-only NDJSON in .llmem/events.ndjson. Each line is a JSON object with fields: id (UUID v4), paths ([]string), name (string), memory (string), updated_at (RFC3339 UTC). Adding appends a line; removing reads all lines, filters out the target, and rewrites the entire file. There is no update command — modify by remove + add. Path filtering supports exact match, directory prefix matching (trailing slash), and reverse directory matching.","updated_at":"2026-03-11T23:49:33Z"}
